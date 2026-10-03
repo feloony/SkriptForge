@@ -1,0 +1,33 @@
+# SkriptForge — Administration
+# Minecraft 1.8.8 / legacy Skript syntax
+
+command /kick <player> [<text>]:
+    permission: skriptforge.kick
+    permission message: &cYou don't have permission.
+    trigger:
+        if arg-2 is set:
+            kick arg-1 due to arg-2
+        else:
+            kick arg-1 due to "You have been kicked by an administrator."
+        broadcast "&c%arg-1% &7was kicked by &e%player%&7."
+
+command /mute <player>:
+    permission: skriptforge.mute
+    permission message: &cYou don't have permission.
+    trigger:
+        set {skriptforge.muted::%uuid of arg-1%} to true
+        send "&c%arg-1% has been muted."
+        send "&cYou have been muted." to arg-1
+
+command /unmute <player>:
+    permission: skriptforge.mute
+    permission message: &cYou don't have permission.
+    trigger:
+        delete {skriptforge.muted::%uuid of arg-1%}
+        send "&a%arg-1% has been unmuted."
+        send "&aYou have been unmuted." to arg-1
+
+on chat:
+    if {skriptforge.muted::%uuid of player%} is true:
+        cancel event
+        send "&cYou are muted."

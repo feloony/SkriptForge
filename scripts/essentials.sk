@@ -1,0 +1,35 @@
+# SkriptForge — Essentials
+# Minecraft 1.8.8 / legacy Skript syntax
+
+command /spawn:
+    trigger:
+        if {skriptforge.spawn} is not set:
+            send "&cThe server spawn has not been configured yet."
+            stop
+        teleport player to {skriptforge.spawn}
+        send "&aTeleported to spawn."
+
+command /setspawn:
+    permission: skriptforge.admin
+    permission message: &cYou don't have permission.
+    trigger:
+        set {skriptforge.spawn} to location of player
+        send "&aServer spawn updated."
+
+command /sethome:
+    trigger:
+        set {skriptforge.home::%uuid of player%} to location of player
+        send "&aYour home has been set."
+
+command /home:
+    trigger:
+        if {skriptforge.home::%uuid of player%} is not set:
+            send "&cYou don't have a home set."
+            stop
+        teleport player to {skriptforge.home::%uuid of player%}
+        send "&aTeleported home."
+
+command /delhome:
+    trigger:
+        delete {skriptforge.home::%uuid of player%}
+        send "&aYour home has been removed."

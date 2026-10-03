@@ -1,0 +1,19 @@
+# SkriptForge — Spawn System
+# Minecraft 1.8.8 / Skript 2.2 compatible
+
+command /setspawn:
+    permission: skriptforge.admin
+    permission message: &cYou don't have permission to set the spawn.
+    trigger:
+        set {skriptforge.spawn} to location of player
+        broadcast "&8[&aSkriptForge&8] &fSpawn has been set by &e%player%&f."
+
+command /spawn:
+    trigger:
+        if {skriptforge.spawn} is not set:
+            send "&cThe server spawn has not been configured yet."
+            stop
+        send "&7Teleporting to spawn..."
+        wait 2 seconds
+        teleport player to {skriptforge.spawn}
+        send "&aYou have been teleported to spawn."

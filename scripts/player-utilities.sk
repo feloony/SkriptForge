@@ -1,0 +1,35 @@
+# SkriptForge — Player Utilities
+# Minecraft 1.8.8 / legacy Skript syntax
+
+command /fly:
+    permission: skriptforge.fly
+    permission message: &cYou don't have permission.
+    trigger:
+        if player is flying:
+            set flying state of player to false
+            send "&cFlight disabled."
+        else:
+            set flying state of player to true
+            send "&aFlight enabled."
+
+command /hat:
+    trigger:
+        if player's tool is air:
+            send "&cHold an item to use as your hat."
+            stop
+        set {_item} to player's tool
+        set player's tool to player's helmet
+        set player's helmet to {_item}
+        send "&aYour hat has been changed."
+
+command /suicide:
+    trigger:
+        kill player
+
+on join:
+    if {skriptforge.firstjoin::%uuid of player%} is not set:
+        set {skriptforge.firstjoin::%uuid of player%} to true
+        send "&8&m--------------------------------" to player
+        send "&aWelcome to the server, &e%player%&a!" to player
+        send "&7This server is powered by &aSkriptForge&7." to player
+        send "&8&m--------------------------------" to player

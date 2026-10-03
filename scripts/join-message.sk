@@ -1,0 +1,14 @@
+# SkriptForge — Join / Quit Messages
+# Minecraft 1.8.8 / Skript 2.2 compatible
+
+on join:
+    set join message to "&8[&a+&8] &f%player%"
+
+on quit:
+    set quit message to "&8[&c-&8] &f%player%"
+
+on first join:
+    send "&8&m--------------------------------" to player
+    send "&aWelcome to the server, &e%player%&a!" to player
+    send "&7Enjoy your time here." to player
+    send "&8&m--------------------------------" to player

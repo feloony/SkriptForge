@@ -1,0 +1,33 @@
+# SkriptForge — Teleport Requests
+# Minecraft 1.8.8 / legacy Skript syntax
+
+command /tpa <player>:
+    trigger:
+        if arg-1 is player:
+            send "&cYou cannot send a teleport request to yourself."
+            stop
+        set {skriptforge.tpa::%uuid of arg-1%} to player
+        send "&aTeleport request sent to &e%arg-1%&a." to player
+        send "&e%player% &7wants to teleport to you." to arg-1
+        send "&7Use &a/tpaccept &7or &c/tpdeny&7." to arg-1
+
+command /tpaccept:
+    trigger:
+        if {skriptforge.tpa::%uuid of player%} is not set:
+            send "&cYou don't have a pending teleport request."
+            stop
+        set {_requester} to {skriptforge.tpa::%uuid of player%}
+        delete {skriptforge.tpa::%uuid of player%}
+        teleport {_requester} to player
+        send "&aTeleport request accepted." to player
+        send "&aYour teleport request was accepted." to {_requester}
+
+command /tpdeny:
+    trigger:
+        if {skriptforge.tpa::%uuid of player%} is not set:
+            send "&cYou don't have a pending teleport request."
+            stop
+        set {_requester} to {skriptforge.tpa::%uuid of player%}
+        delete {skriptforge.tpa::%uuid of player%}
+        send "&cTeleport request denied." to player
+        send "&cYour teleport request was denied." to {_requester}

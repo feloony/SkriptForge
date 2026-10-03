@@ -1,0 +1,25 @@
+# SkriptForge — Simple Warp System
+# Minecraft 1.8.8 / Skript 2.2 compatible
+
+command /setwarp <text>:
+    permission: skriptforge.warp.admin
+    trigger:
+        set {skriptforge.warp.%arg-1%} to location of player
+        send "&aWarp &e%arg-1% &ahas been created."
+
+command /warp <text>:
+    trigger:
+        if {skriptforge.warp.%arg-1%} is not set:
+            send "&cThat warp does not exist."
+            stop
+        teleport player to {skriptforge.warp.%arg-1%}
+        send "&aTeleported to warp &e%arg-1%&a."
+
+command /delwarp <text>:
+    permission: skriptforge.warp.admin
+    trigger:
+        if {skriptforge.warp.%arg-1%} is not set:
+            send "&cThat warp does not exist."
+            stop
+        delete {skriptforge.warp.%arg-1%}
+        send "&aWarp &e%arg-1% &ahas been deleted."

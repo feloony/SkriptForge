@@ -1,0 +1,30 @@
+# SkriptForge — Utility Commands
+# Minecraft 1.8.8 / Skript 2.2 compatible
+
+command /heal:
+    permission: skriptforge.heal
+    trigger:
+        heal player
+        send "&aYou have been healed."
+
+command /feed:
+    permission: skriptforge.feed
+    trigger:
+        feed player
+        send "&aYou are no longer hungry."
+
+command /workbench:
+    trigger:
+        open crafting table to player
+
+command /day:
+    permission: skriptforge.time
+    trigger:
+        set time in player's world to 6:00
+        send "&aTime set to day."
+
+command /night:
+    permission: skriptforge.time
+    trigger:
+        set time in player's world to 18:00
+        send "&aTime set to night."

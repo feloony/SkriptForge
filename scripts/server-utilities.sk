@@ -1,0 +1,42 @@
+# SkriptForge — Server Utilities
+# Minecraft 1.8.8 / legacy Skript syntax
+
+command /broadcast <text>:
+    permission: skriptforge.broadcast
+    permission message: &cYou don't have permission.
+    trigger:
+        broadcast "&8[&aSkriptForge&8] &f%arg-1%"
+
+command /day:
+    permission: skriptforge.time
+    permission message: &cYou don't have permission.
+    trigger:
+        set time in world of player to 0
+        broadcast "&8[&aSkriptForge&8] &e%player% &7set the time to day."
+
+command /night:
+    permission: skriptforge.time
+    permission message: &cYou don't have permission.
+    trigger:
+        set time in world of player to 13000
+        broadcast "&8[&aSkriptForge&8] &e%player% &7set the time to night."
+
+command /feed:
+    permission: skriptforge.feed
+    permission message: &cYou don't have permission.
+    trigger:
+        set food level of player to 20
+        send "&aYou have been fed."
+
+command /heal:
+    permission: skriptforge.heal
+    permission message: &cYou don't have permission.
+    trigger:
+        heal player
+        send "&aYou have been healed."
+
+command /workbench:
+    permission: skriptforge.workbench
+    permission message: &cYou don't have permission.
+    trigger:
+        open crafting table to player
